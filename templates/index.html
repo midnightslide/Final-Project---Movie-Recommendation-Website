@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>RecFlix - A simple movie recommendation system</title>
+		<!-- INCLUDES FOR JQUERY SUGGESTION MAGIC -->
+		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+		<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+		<script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
+		<!-- INCLUDE FOR BOOTSTRAP FORMATTING -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- SOME CSS TO SPICE THINGS UP A BIT -->
+		<style type="text/css">
+			body { background: black !important; color: #c0c0c0 !important} 
+
+			.border {
+    		box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.527), 0 10px 20px 0 rgba(0, 0, 0, 0.295);
+			}
+
+			.border:hover {
+    		box-shadow: 0 0 15px rgba(243, 9, 9, 0.986); 
+			}
+
+			h4 {
+				color: #fff;
+			}
+
+			form {
+			  display: flex;
+			  align-items: center; /* Vertical alignment */
+			}
+
+			input[type=text] {
+				background-color: rgba(0, 0, 0, 0.5);
+				padding-left:20px;
+				height: 35px;
+				border-radius: 15px;
+			  border-width: 2px;
+				border-style: solid;
+				border-color: #ff0101;
+				color: #fff;
+				width: 100%;
+				display: block;
+			  margin: 15px auto;
+			  max-width: 500px;
+			  width: 100%;
+			}
+
+			input[type=submit] {
+				background-color: #ff0101;
+				border-radius: 15px;
+			  border-width: 2px;
+				border-style: solid;
+				border-color: #ff0101;
+				color: #fff;
+				width: auto;
+				height: auto;
+				margin-left: 10px;
+			}
+			.autocomplete {
+			  position: relative;
+			  display: inline-block;
+			}
+
+			*:focus {
+			    outline: none;
+			}
+
+			.button-styled{
+							background-color: #ff0101;
+							border-radius: 15px;
+			  			border-width: 2px;
+							border-style: solid;
+							border-color: #ff0101;
+							color: #fff;
+							height: 30px;
+							width: 150px;
+							margin: 10px auto;
+						}
+
+			.ui-menu-item{
+				padding: 10px 0 0 10px;
+  			cursor: pointer;
+  			background-color:  rgba(23, 23, 24, 0.87); 
+				border-bottom: 1px solid rgba(231, 5, 5, 0.719); 
+				color: #fff;
+			}
+
+			.ui-menu-item:hover {
+  		/*when hovering an item:*/
+  			background-color: #222; 
+			}
+			.ui-widget-content {
+				background: transparent !important;
+				border: none !important;
+			}
+	  </style>
+	</head>
+  <body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="jumbotron" style="text-align: center; background: url({{ url_for('static',filename='img/bg1.jpg') }}) no-repeat; background-size: cover;">
+						<div class="row">
+							<div class='col-md-4'></div>
+							<div class='col-md-4'>
+								<img src="{{ url_for('static',filename='img/recflix-logo.png') }}"/>
+							</div>
+							<div class='col-md-4'>
+								<!-- SUPER COOL FLASK/JQUERY AUTOCOMPLETE FORM -->
+								<form method="POST" novalidate>
+									<div class="autocomplete" style="width:300px;">
+										{{ form.autocomp (placeholder="Enter Movie Title")}} 
+									</div>
+										{{ form.submit() }}
+								</form>
+								<!-- JQUERY/AJAX SCRIPT FOR SAID AUTOCOMPLETE FORM. CONNECTS TO THE AUTOCOMPLETE ROUTE IN FLASK -->
+								<script>
+									$(function() {
+										$.ajax({
+											url: '{{ url_for("autocomplete") }}'
+												}).done(function (data){
+													$('#movie_autocomplete').autocomplete({
+														source: data,
+														minLength: 2
+													});
+												});
+										});
+									</script>
+							</div>
+						</div>
+						<h4>
+							This is a basic movie recommendation system built in Python, using the MovieLens 1M dataset. Recommendations are determined using a cosine similarity algorithm based on the genre of the film.
+						</h4>
+						<p>
+							Select a move below or search for a movie above to get some recommendations
+						</p>
+						<div id="movie_selection" class="row">
+							<!-- MOVIE RANDOM SELECTION -->
+							<div class='col-md-2'><a href='rec/{{title2[0]}}'><img class='border' style='width: 220px; height: 300px; margin: 0px; float: left; border: 1px solid black;' src={{url[0]}}></a></div>   
+							<div class='col-md-2'><a href='rec/{{title2[1]}}'><img class='border' style='width: 220px; height: 300px; margin: 0px; float: left; border: 1px solid black;' src={{url[1]}}></a></div>
+							<div class='col-md-2'><a href='rec/{{title2[2]}}'><img class='border' style='width: 220px; height: 300px; margin: 0px; float: left; border: 1px solid black;' src={{url[2]}}></a></div>                    
+							<div class='col-md-2'><a href='rec/{{title2[3]}}'><img class='border' style='width: 220px; height: 300px; margin: 0px; float: left; border: 1px solid black;' src={{url[3]}}></a></div>                    
+							<div class='col-md-2'><a href='rec/{{title2[4]}}'><img class='border' style='width: 220px; height: 300px; margin: 0px; float: left; border: 1px solid black;' src={{url[4]}}></a></div>                    
+							<div class='col-md-2'><a href='rec/{{title2[5]}}'><img class='border' style='width: 220px; height: 300px; margin: 0px; float: left; border: 1px solid black;' src={{url[5]}}></a></div>				
+						</div>
+						<!-- REFRESH PAGE TO GET ANOTHER RANDOM SELECTION -->
+						<div class="row" style="display: inline-block; margin: 10px 0 -10px 0;">
+							<h3 style="margin-top:15px">Don't see anything you like?</h3>
+							<button class="button-styled" type="submit"  onClick="refreshPage()">Load New Movies</button>
+							<script>
+								function refreshPage(){
+									window.location.reload();
+								} 
+							</script>	
+						</div>		
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- MORE INCLUDES -->   
+  <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/scripts.js') }}"></script>
+  </body>
+</html>

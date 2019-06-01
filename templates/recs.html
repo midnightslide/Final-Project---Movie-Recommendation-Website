@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>RecFlix - Movie Recommendatons</title>
+		<!-- SPICY CSS FORMATTING -->
+		<style type="text/css">
+			body { background: black !important; color: #c0c0c0 !important} 
+			
+			h4{
+				color: #fff;
+				margin: 0 0 0 20px;
+			}
+
+			.border {
+    		box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.527), 0 10px 20px 0 rgba(0, 0, 0, 0.295);
+			}
+
+			.border:hover {
+    		box-shadow: 0 0 15px rgba(243, 9, 9, 0.986); 
+			}
+
+			.button-styled{
+				background-color: #ff0101;
+				border-radius: 15px;
+  			border-width: 2px;
+				border-style: solid;
+				border-color: #ff0101;
+				color: #fff;
+				height: 30px;
+				width: 150px;
+				margin: 25px auto;
+			}
+		 </style> 
+		 <!-- INCLUDE BOOTSTRAP WIZARDRY -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+  <div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- CHANGE THE JUMBOTRON BG TO THE SELECTED MOVIE BACKGROUND -->
+				<div class="jumbotron" style="text-align: center; margin-top:-30px !important; background: linear-gradient(to bottom, rgba(23, 23, 24, 0.87), rgba(2, 2, 2, 0.73)), url({{ titleurl }}); background-size: contain;">
+					<img src="{{ url_for('static',filename='img/recflix-logo.png') }}"/>
+					<div class="row"><h4 style="margin-bottom: 0px;">Based on your search of {{ title }}, here are some movies that you might find interesting:</h3></div>
+					<div class="row col-centered" style="text-align: center; margin-left: 10px;">
+						<!-- MOVIE SUGGESTIONS -->
+						<div class='col-md-2'><a href='{{moviename[0]}}'><img class='border' style='width: 180px; height: 240px; margin: 20px 0 0 0; float: left; border: 1px solid black;' src='{{url1[0]}}'></a></div>                    
+						<div class='col-md-2'><a href='{{moviename[1]}}'><img class='border' style='width: 180px; height: 240px; margin: 20px 0 0 0; float: left; border: 1px solid black;' src='{{url1[1]}}'></a></div>                    
+						<div class='col-md-2'><a href='{{moviename[2]}}'><img class='border' style='width: 180px; height: 240px; margin: 20px 0 0 0; float: left; border: 1px solid black;' src='{{url1[2]}}'></a></div>                    
+						<div class='col-md-2'><a href='{{moviename[3]}}'><img class='border' style='width: 180px; height: 240px; margin: 20px 0 0 0; float: left; border: 1px solid black;' src='{{url1[3]}}'></a></div>                    
+						<div class='col-md-2'><a href='{{moviename[4]}}'><img class='border' style='width: 180px; height: 240px; margin: 20px 0 0 0; float: left; border: 1px solid black;' src='{{url1[4]}}'></a></div>                    
+						<div class='col-md-2'><a href='{{moviename[5]}}'><img class='border' style='width: 180px; height: 240px; margin: 20px 0 0 0; float: left; border: 1px solid black;' src='{{url1[5]}}'></a></div>                    
+						<div class='col-md-2'><a href='{{moviename[6]}}'><img class='border' style='width: 180px; height: 240px; margin: 20px 0 0 0; float: left; border: 1px solid black;' src='{{url1[6]}}'></a></div>                    
+						<div class='col-md-2'><a href='{{moviename[7]}}'><img class='border' style='width: 180px; height: 240px; margin: 20px 0 0 0; float: left; border: 1px solid black;' src='{{url1[7]}}'></a></div>                    
+						<div class='col-md-2'><a href='{{moviename[8]}}'><img class='border' style='width: 180px; height: 240px; margin: 20px 0 0 0; float: left; border: 1px solid black;' src='{{url1[8]}}'></a></div>                    
+						<div class='col-md-2'><a href='{{moviename[9]}}'><img class='border' style='width: 180px; height: 240px; margin: 20px 0 0 0; float: left; border: 1px solid black;' src='{{url1[9]}}'></a></div>                    
+						<div class='col-md-2'><a href='{{moviename[10]}}'><img class='border' style='width: 180px; height: 240px; margin: 20px 0 0 0; float: left; border: 1px solid black;' src='{{url1[10]}}'></a></div>                    
+						<div class='col-md-2'><a href='{{moviename[11]}}'><img class='border' style='width: 180px; height: 240px; margin: 20px 0 0 0; float: left; border: 1px solid black;' src='{{url1[11]}}'></a></div>			
+					</div>
+					<a href="../"><button class="button-styled" >Go Back</button></a>
+				</div>
+			</div>		
+		</div>
+	</div>
+	<!-- MORE INCLUDES... FOR THINGS... AND STUFF... -->
+  <script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/scripts.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+body {
+    background: #000 !important;
+    color: #c0c0c0;
+}
+
+.border {
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.527), 0 10px 20px 0 rgba(0, 0, 0, 0.295);
+}
+
+.border:hover {
+    box-shadow: 0 0 15px rgba(243, 9, 9, 0.986); 
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+  
